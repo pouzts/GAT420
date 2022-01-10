@@ -5,6 +5,10 @@ using UnityEngine;
 public class AutonomousAgent : Agent
 {
     [SerializeField] Perception perception;
+    [SerializeField] Steering steering;
+
+    public float maxSpeed;
+    public float maxForce;
 
     public Vector3 velocity { get; set; } = Vector3.zero;
 
@@ -17,11 +21,17 @@ public class AutonomousAgent : Agent
         {
             Debug.DrawLine(transform.position, gameObjects[0].transform.position);
 
-            Vector3 force = transform.position - gameObjects[0].transform.position;
-            accleration += force.normalized * 3;
+            Vector3 force = steering.Flee(this, gameObjects[0]);
+            accleration += force;
         }
 
         velocity += accleration * Time.deltaTime;
+        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
         transform.position += velocity * Time.deltaTime;
+
+        if (velocity.sqrMagnitude > 0.1f)
+        {
+            transform.rotation = Quaternion.LookRotation(velocity);
+        }
     }
 }
