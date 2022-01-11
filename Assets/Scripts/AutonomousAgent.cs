@@ -17,12 +17,13 @@ public class AutonomousAgent : Agent
         Vector3 accleration = Vector3.zero;
 
         GameObject[] gameObjects = perception.GetGameObjects();
+        if (gameObjects.Length == 0)
+        {
+            accleration += steering.Wander(this);
+        }
         if (gameObjects.Length != 0)
         {
-            Debug.DrawLine(transform.position, gameObjects[0].transform.position);
-
-            Vector3 force = steering.Flee(this, gameObjects[0]);
-            accleration += force;
+            accleration += steering.Flee(this, gameObjects[0]);
         }
 
         velocity += accleration * Time.deltaTime;
@@ -33,5 +34,7 @@ public class AutonomousAgent : Agent
         {
             transform.rotation = Quaternion.LookRotation(velocity);
         }
+
+        transform.position = Utilities.Wrap(transform.position, new Vector3(-10, -10, -10), new Vector3(10, 10, 10), new Vector3(1.5f, 1.5f, 1.5f));
     }
 }
