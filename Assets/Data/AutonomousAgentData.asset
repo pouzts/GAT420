@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f324ec2808d6ec4b939050b7b9abe8a, type: 3}
+  m_Name: AutonomousAgentData
+  m_EditorClassIdentifier: 
+  maxSpeed: 12
+  maxForce: 8
+  seekWeight: 3.29
+  fleeWeight: 1.96
+  cohesionWeight: 1
+  separationWeight: 1
+  alignmentWeight: 1
+  separationRadius: 1
