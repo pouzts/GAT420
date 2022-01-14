@@ -9,34 +9,16 @@ public static class Utilities
         Vector3 result = v;
 
         // x
-        if (result.x > max.x + offset.x)
-        {
-            result.x = min.x;
-        }
-        if (result.x < min.x - offset.x)
-        {
-            result.x = max.x;
-        }
+        if (result.x > max.x + offset.x) result.x = min.x;
+        else if (result.x < min.x - offset.x) result.x = max.x;
 
         // y
-        if (result.y > max.y + offset.y)
-        {
-            result.y = min.y;
-        }
-        if (result.y < min.y - offset.y)
-        {
-            result.y = max.y;
-        }
+        if (result.y > max.y + offset.y) result.y = min.y;
+        else if (result.y < min.y - offset.y) result.y = max.y;
 
         // z
-        if (result.z > max.z + offset.z)
-        {
-            result.z = min.z;
-        }
-        if (result.z < min.z - offset.z)
-        {
-            result.z = max.z;
-        }
+        if (result.z > max.z + offset.z) result.z = min.z;
+        else if (result.z < min.z - offset.z) result.z = max.z;
 
         return result;
     }

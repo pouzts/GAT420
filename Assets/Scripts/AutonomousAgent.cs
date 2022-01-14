@@ -6,6 +6,7 @@ public class AutonomousAgent : Agent
 {
     [SerializeField] Perception perception;
     [SerializeField] Perception flockPerception;
+    [SerializeField] ObstaclePerception obstaclePerception;
     [SerializeField] Steering steering;
     [SerializeField] AutonomousAgentData agentData;
 
@@ -16,31 +17,38 @@ public class AutonomousAgent : Agent
 
     void Update()
     {
-        Vector3 accleration = Vector3.zero;
+        Vector3 acceleration = Vector3.zero;
 
         GameObject[] gameObjects = perception.GetGameObjects();
         if (gameObjects.Length == 0)
         {
-            accleration += steering.Wander(this);
+            acceleration += steering.Wander(this);
         }
         
         // Seek / Flee
         if (gameObjects.Length != 0)
         {
-            accleration += steering.Seek(this, gameObjects[0]) * agentData.seekWeight;
-            accleration += steering.Flee(this, gameObjects[0]) * agentData.fleeWeight;
+            acceleration += steering.Seek(this, gameObjects[0]) * agentData.seekWeight;
+            acceleration += steering.Flee(this, gameObjects[0]) * agentData.fleeWeight;
         }
 
         // Flocking
         gameObjects = flockPerception.GetGameObjects();
         if (gameObjects.Length != 0)
         {
-            accleration += steering.Cohesion(this, gameObjects) * agentData.cohesionWeight;
-            accleration += steering.Seperation(this, gameObjects, agentData.separationRadius) * agentData.separationWeight;
-            accleration += steering.Alignment(this, gameObjects) * agentData.alignmentWeight;
+            acceleration += steering.Cohesion(this, gameObjects) * agentData.cohesionWeight;
+            acceleration += steering.Seperation(this, gameObjects, agentData.separationRadius) * agentData.separationWeight;
+            acceleration += steering.Alignment(this, gameObjects) * agentData.alignmentWeight;
         }
 
-        velocity += accleration * Time.deltaTime;
+        // obstacle avoidance
+        if (obstaclePerception.IsObstacleInFront())
+        {
+            Vector3 direction = obstaclePerception.GetOpenDirection();
+            acceleration += steering.CalculateSteering(this, direction) * agentData.obstacleWeight;
+        }
+
+        velocity += acceleration * Time.deltaTime;
         velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
         transform.position += velocity * Time.deltaTime;
 

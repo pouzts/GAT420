@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &276813541235349187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3906637976745207982}
+  m_Layer: 0
+  m_Name: Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3906637976745207982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276813541235349187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.213, z: 0.597}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2776943262314358827}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2776943262314358817
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,10 +39,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2776943262314358827}
-  - component: {fileID: 2776943262314358820}
+  - component: {fileID: 6678205431019256184}
   - component: {fileID: 2776943262314358826}
-  - component: {fileID: 2776943262314358821}
   - component: {fileID: 2234797641088076040}
+  - component: {fileID: 4669538773088940382}
+  - component: {fileID: 6321687227625271912}
   - component: {fileID: 2776943262314358822}
   - component: {fileID: 2776943262314358823}
   - component: {fileID: 2776943262314358816}
@@ -35,10 +66,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2776943263104239001}
+  - {fileID: 3906637976745207982}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2776943262314358820
+--- !u!114 &6678205431019256184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,8 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359f21003baa30845a39f4bcdce7f7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perception: {fileID: 2776943262314358821}
+  perception: {fileID: 4669538773088940382}
   flockPerception: {fileID: 2234797641088076040}
+  obstaclePerception: {fileID: 6321687227625271912}
   steering: {fileID: 2776943262314358826}
   agentData: {fileID: 11400000, guid: eedc167b679fe48438374899c65fd3dc, type: 2}
 --- !u!114 &2776943262314358826
@@ -69,21 +102,6 @@ MonoBehaviour:
   wanderDistance: 5
   wanderRadius: 2
   wanderDisplacement: 2
---- !u!114 &2776943262314358821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2776943262314358817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f96645b8eaf65de4bb2f193f75f519a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagName: Player
-  radius: 50
-  maxAngle: 120
 --- !u!114 &2234797641088076040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +117,41 @@ MonoBehaviour:
   tagName: Agent1
   radius: 5
   maxAngle: 180
+--- !u!114 &4669538773088940382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2776943262314358817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5765f57b69d291428011625ee59e3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: Player
+  raycastTransform: {fileID: 3906637976745207982}
+  distance: 13.7
+  angle: 90
+  numRaycast: 20
+--- !u!114 &6321687227625271912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2776943262314358817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690b694ffc308a64e845dc79b6cf33e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 1
+  radius: 0
+  numRaycast: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!33 &2776943262314358822
 MeshFilter:
   m_ObjectHideFlags: 0
