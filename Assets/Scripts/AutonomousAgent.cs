@@ -36,6 +36,8 @@ public class AutonomousAgent : Agent
         if (gameObjects.Length != 0)
         {
             accleration += steering.Cohesion(this, gameObjects) * agentData.cohesionWeight;
+            accleration += steering.Seperation(this, gameObjects, agentData.separationRadius) * agentData.separationWeight;
+            accleration += steering.Alignment(this, gameObjects) * agentData.alignmentWeight;
         }
 
         velocity += accleration * Time.deltaTime;
@@ -47,6 +49,6 @@ public class AutonomousAgent : Agent
             transform.rotation = Quaternion.LookRotation(velocity);
         }
 
-        transform.position = Utilities.Wrap(transform.position, new Vector3(-10, -10, -10), new Vector3(10, 10, 10), new Vector3(1, 1, 1));
+        transform.position = Utilities.Wrap(transform.position, new Vector3(-20, -20, -20), new Vector3(20, 20, 20), new Vector3(1, 1, 1));
     }
 }
