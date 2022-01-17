@@ -57,6 +57,6 @@ public class AutonomousAgent : Agent
             transform.rotation = Quaternion.LookRotation(velocity);
         }
 
-        transform.position = Utilities.Wrap(transform.position, new Vector3(-20, -20, -20), new Vector3(20, 20, 20), new Vector3(1, 1, 1));
+        transform.position = Utilities.Wrap(transform.position, new Vector3(-20, -20, -20), new Vector3(20, 20, 20));
     }
 }

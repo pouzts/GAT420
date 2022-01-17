@@ -14,6 +14,6 @@ public class Player : MonoBehaviour
         direction.z = Input.GetAxis("Vertical");
 
         transform.position += direction * speed * Time.deltaTime;
-        transform.position = Utilities.Wrap(transform.position, new Vector3(-20, -20, -20), new Vector3(20, 20, 20), new Vector3(1, 1, 1));
+        transform.position = Utilities.Wrap(transform.position, new Vector3(-20, -20, -20), new Vector3(20, 20, 20));
     }
 }
