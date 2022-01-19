@@ -44,11 +44,12 @@ GameObject:
   - component: {fileID: 2234797641088076040}
   - component: {fileID: 4669538773088940382}
   - component: {fileID: 6321687227625271912}
+  - component: {fileID: 345933376254347240}
   - component: {fileID: 2776943262314358822}
   - component: {fileID: 2776943262314358823}
   - component: {fileID: 2776943262314358816}
   m_Layer: 0
-  m_Name: Agent
+  m_Name: AutonomousAgent
   m_TagString: Agent1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359f21003baa30845a39f4bcdce7f7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 345933376254347240}
   perception: {fileID: 4669538773088940382}
   flockPerception: {fileID: 2234797641088076040}
   obstaclePerception: {fileID: 6321687227625271912}
@@ -152,6 +154,19 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &345933376254347240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2776943262314358817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cacf4ff69bc3040969778076961acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementData: {fileID: 11400000, guid: e0f8c14629481a64a83124ed401cecfc, type: 2}
 --- !u!33 &2776943262314358822
 MeshFilter:
   m_ObjectHideFlags: 0
