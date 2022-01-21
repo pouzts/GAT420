@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-   
+    public static T[] GetNodes<T>() where T : Component
+    {
+        return GameObject.FindObjectsOfType<T>();
+    }
 }
