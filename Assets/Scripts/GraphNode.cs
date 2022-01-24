@@ -5,24 +5,6 @@ using UnityEngine;
 
 public class GraphNode : Node
 {
-    public enum Type
-    {
-        DEFAULT,
-        SOURCE,
-        DESTINATION,
-        PATH,
-        VISITED
-    }
-
-    Color[] colors =
-    {
-        Color.white,
-        Color.green,
-        Color.red,
-        Color.yellow,
-        Color.magenta
-    };
-
     public struct Edge
     {
         public GraphNode nodeA;
@@ -30,26 +12,8 @@ public class GraphNode : Node
     }
 
     public GraphNode parent { get; set; } = null;
-    public List<Edge> edges { get; set; } = new List<Edge>();
-    public Type type { get; set; } = Type.DEFAULT;
     public bool visited { get; set; } = false;
-
-    void Update()
-    {
-        // update node color using current node type
-        GetComponent<Renderer>().material.color = colors[(int)type];
-        // draw edges
-        edges.ForEach(edge => Debug.DrawLine(edge.nodeA.transform.position, edge.nodeB.transform.position));
-    }
-
-    public static GraphNode GetNode(Type type)
-    {
-        // get first node of type
-        var nodes = GetNodes<GraphNode>();
-        var node = nodes.FirstOrDefault(node => node.type == type);
-
-        return node;
-    }
+    public List<Edge> edges { get; set; } = new List<Edge>();
 
     public static void UnlinkNodes()
     {
@@ -60,6 +24,7 @@ public class GraphNode : Node
 
     public static void LinkNodes(float radius)
     {
+        // link all nodes to neighbor nodes within radius
         var nodes = GetNodes<GraphNode>();
         nodes.ToList().ForEach(node => LinkNeighbors(node, radius));
     }
@@ -84,22 +49,10 @@ public class GraphNode : Node
             }
         }
     }
-    
-    public static void SetNodeType(Type typeFrom, Type typeTo)
-    {
-        var nodes = GetNodes<GraphNode>();
-
-        var result = nodes.Where(node => node.type == typeFrom);
-        result.ToList().ForEach(node => node.type = typeTo);
-    }
 
     public static void ResetNodes()
     {
-        // reset path and visited nodes
-        SetNodeType(Type.PATH, Type.DEFAULT);
-        SetNodeType(Type.VISITED, Type.DEFAULT);
-
-        // set nodes not visited and parent to null
+        // reset nodes visited and parent
         var nodes = GetNodes<GraphNode>();
         nodes.ToList().ForEach(node => { node.visited = false; node.parent = null; });
     }

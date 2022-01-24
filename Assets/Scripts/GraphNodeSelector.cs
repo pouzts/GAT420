@@ -5,9 +5,13 @@ using UnityEngine;
 public class GraphNodeSelector : MonoBehaviour
 {
     public GameObject selector;
+    public GameObject source;
+    public GameObject destination;
     public LayerMask layerMask;
 
-    public bool IsActive { get { return selector.activeSelf; } }
+    public bool isActive { get { return selector.activeSelf; } }
+    public GraphNode sourceNode { get; set; }
+    public GraphNode destinationNode { get; set; }
 
     void Update()
     {
@@ -22,27 +26,23 @@ public class GraphNodeSelector : MonoBehaviour
             selector.SetActive(true);
             selector.transform.position = node.transform.position;
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.S))
             {
-                if (Input.GetKey(KeyCode.S))
-                {
-                    // clear current source node and set new source node
-                    GraphNode.SetNodeType(GraphNode.Type.SOURCE, GraphNode.Type.DEFAULT);
-                    node.type = GraphNode.Type.SOURCE;
-                    GraphNode.ResetNodes();
-                }
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    // clear current destination node and set new destination node
-                    GraphNode.SetNodeType(GraphNode.Type.DESTINATION, GraphNode.Type.DEFAULT);
-                    node.type = GraphNode.Type.DESTINATION;
-                    GraphNode.ResetNodes();
-                }
+                sourceNode = node;
+                source.transform.position = node.transform.position;
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                destinationNode = node;
+                destination.transform.position = node.transform.position;
             }
         }
         else
         {
             selector.SetActive(false);
         }
+
+        destination.SetActive(destinationNode != null);
+        source.SetActive(sourceNode != null);
     }
 }
