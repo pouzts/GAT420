@@ -50,7 +50,7 @@ public class PathViewer : MonoBehaviour
 		GraphNode.ResetNodes();
 
 		// build path
-		found = Search.BuildPath(Search.DFS, nodeSelector.sourceNode, nodeSelector.destinationNode, ref path, steps);
+		found = Search.BuildPath(Search.BFS, nodeSelector.sourceNode, nodeSelector.destinationNode, ref path, steps);
 	}
 
 	public void ShowNodes()
