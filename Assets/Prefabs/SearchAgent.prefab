@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cacf4ff69bc3040969778076961acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementData: {fileID: 11400000, guid: e0f8c14629481a64a83124ed401cecfc, type: 2}
+  movementData: {fileID: 11400000, guid: f16cac28eaa64564c8d80beb1b241dd4, type: 2}
 --- !u!33 &2776943262314358822
 MeshFilter:
   m_ObjectHideFlags: 0
