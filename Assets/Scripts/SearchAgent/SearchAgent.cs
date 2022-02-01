@@ -23,9 +23,9 @@ public class SearchAgent : Agent
 
     private void Update()
     {
-        Debug.DrawLine(transform.position, sourceNode.transform.position, Color.green);
-        Debug.DrawLine(transform.position, destinationNode.transform.position, Color.red);
-        Debug.DrawLine(transform.position + Vector3.up, targetNode.transform.position + Vector3.up, Color.yellow);
+        //Debug.DrawLine(transform.position, sourceNode.transform.position, Color.green);
+        //Debug.DrawLine(transform.position, destinationNode.transform.position, Color.red);
+        //Debug.DrawLine(transform.position + Vector3.up, targetNode.transform.position + Vector3.up, Color.yellow);
 
         if (targetNode != null)
         {
