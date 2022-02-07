@@ -41,7 +41,8 @@ GameObject:
   - component: {fileID: 2776943262314358827}
   - component: {fileID: 9131296388893781731}
   - component: {fileID: 8407333173925728765}
-  - component: {fileID: 574765642889345037}
+  - component: {fileID: 5652766763254234670}
+  - component: {fileID: 8048322380782365812}
   - component: {fileID: 2776943262314358822}
   - component: {fileID: 2776943262314358823}
   - component: {fileID: 2776943262314358816}
@@ -83,8 +84,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 8407333173925728765}
-  animator: {fileID: 0}
-  path: {fileID: 574765642889345037}
+  animator: {fileID: 2711095232150504081}
+  perception: {fileID: 8048322380782365812}
+  pathFollower: {fileID: 5652766763254234670}
+  enemySeen:
+    value: 0
+  helath:
+    value: 0
+  timer:
+    value: 0
 --- !u!114 &8407333173925728765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementData: {fileID: 11400000, guid: d6d24e8dcfd69b74f9c03374eab0903e, type: 2}
---- !u!114 &574765642889345037
+--- !u!114 &5652766763254234670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,10 +115,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2776943262314358817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af59127c6c1581d44bbad74194f9f7c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a69514dca05508c4284193d0d97aa325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pathNodes: {fileID: 0}
+--- !u!114 &8048322380782365812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2776943262314358817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5765f57b69d291428011625ee59e3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: Player
+  raycastTransform: {fileID: 3906637976745207982}
+  distance: 4
+  angle: 80
+  numRaycast: 20
 --- !u!33 &2776943262314358822
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -276,5 +301,10 @@ PrefabInstance:
 --- !u!4 &8322531626507294955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8c399e8efc7ed8043a3026aeeeb199b5, type: 3}
+  m_PrefabInstance: {fileID: 8427689651507478272}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2711095232150504081 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 8c399e8efc7ed8043a3026aeeeb199b5, type: 3}
   m_PrefabInstance: {fileID: 8427689651507478272}
   m_PrefabAsset: {fileID: 0}
