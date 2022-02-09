@@ -30,7 +30,7 @@ public class PatrolState : State
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            owner.stateMachine.SetState(owner.stateMachine.StateFromName("idle"));
+            owner.stateMachine.SetState(owner.stateMachine.StateFromName(typeof(IdleState).Name));
         }
     }
 }

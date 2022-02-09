@@ -453,6 +453,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 349410716}
+    - target: {fileID: 9131296388893781731, guid: 9b8f6c1f12407c84697c6b2f27d6a4bc, type: 3}
+      propertyPath: health.value
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b8f6c1f12407c84697c6b2f27d6a4bc, type: 3}
 --- !u!1 &536968942

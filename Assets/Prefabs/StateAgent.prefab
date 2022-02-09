@@ -89,7 +89,7 @@ MonoBehaviour:
   pathFollower: {fileID: 5652766763254234670}
   enemySeen:
     value: 0
-  helath:
+  health:
     value: 0
   timer:
     value: 0
