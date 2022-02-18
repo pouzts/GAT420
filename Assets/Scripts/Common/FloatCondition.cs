@@ -24,11 +24,11 @@ public class FloatCondition : Condition
 			case Predicate.EQUAL:
 				result = (parameter == condition);
 				break;
-			case Predicate.LESS_EQUAL:
-				result = (parameter <= condition);
-				break;
 			case Predicate.LESS:
 				result = (parameter < condition);
+				break;
+			case Predicate.LESS_EQUAL:
+				result = (parameter <= condition);
 				break;
 			case Predicate.GREATER:
 				result = (parameter > condition);

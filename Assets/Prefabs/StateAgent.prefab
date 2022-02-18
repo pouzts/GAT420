@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8407333173925728765}
   - component: {fileID: 5652766763254234670}
   - component: {fileID: 8630323333278819767}
+  - component: {fileID: 3334283691055346065}
   - component: {fileID: 2776943262314358822}
   - component: {fileID: 2776943262314358823}
   - component: {fileID: 2776943262314358816}
@@ -92,7 +93,7 @@ MonoBehaviour:
   enemyDistance:
     value: 0
   health:
-    value: 0
+    value: 20
   timer:
     value: 0
 --- !u!114 &8407333173925728765
@@ -108,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementData: {fileID: 11400000, guid: d6d24e8dcfd69b74f9c03374eab0903e, type: 2}
+  navMeshAgent: {fileID: 0}
 --- !u!114 &5652766763254234670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathNodes: {fileID: 0}
+  pathName: 
 --- !u!114 &8630323333278819767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +140,23 @@ MonoBehaviour:
   distance: 5
   angle: 80
   raycastTransform: {fileID: 3906637976745207982}
-  numRaycast: 20
+  numRaycast: 30
   radius: 0.5
+--- !u!114 &3334283691055346065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2776943262314358817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19230e8305905534f8959388646e0a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: 
+  distance: 0
+  damage: 0
 --- !u!33 &2776943262314358822
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -299,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bae3227da3eea3345a6f12cf9a41bd09, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 8c399e8efc7ed8043a3026aeeeb199b5, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c399e8efc7ed8043a3026aeeeb199b5, type: 3}
 --- !u!4 &8322531626507294955 stripped

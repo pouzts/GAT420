@@ -6,7 +6,7 @@ public class Transition
 {
     Condition[] conditions;
 
-    public Transition(Condition[] conditions)
+    public Transition(params Condition[] conditions)
     {
         this.conditions = conditions;
     }

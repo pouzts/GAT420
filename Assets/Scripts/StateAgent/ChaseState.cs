@@ -16,7 +16,7 @@ public class ChaseState : State
 
     public override void OnExit()
     {
-
+        
     }
 
     public override void OnUpdate()
