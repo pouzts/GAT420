@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UtilityAgent : Agent
 {
-    Need[] needs;
+    [SerializeField] Perception perception;
     [SerializeField] MeterUI meter;
+    
+    Need[] needs;
+    UtilityObject activeUtilityObject = null;
 
     public float happiness
     {
         get 
         {
-            float totalMotive = 0; 
+            float totalMotive = 2; 
             foreach (var need in needs)
             {
-                totalMotive += need.motive;
+                totalMotive -= need.motive;
             }
 
             return totalMotive / needs.Length;
@@ -31,20 +35,49 @@ public class UtilityAgent : Agent
     void Update()
     {
         meter.slider.value = happiness;
-        meter.worldPosition = transform.position + Vector3.up * 2;
+
+        if (activeUtilityObject == null)
+        {
+            var gameObjects = perception.GetGameObjects();
+            List<UtilityObject> utilityObjects = new List<UtilityObject>();
+
+            foreach (var go in gameObjects)
+            {
+                if (go.TryGetComponent<UtilityObject>(out UtilityObject utilityObject))
+                {
+                    utilityObject.visible = true;
+                    utilityObject.score = GetUtilityObjectScore(utilityObject);
+                    utilityObjects.Add(utilityObject);
+                }
+            }
+        }
     }
 
-/*    private void OnGUI()
+    private void LateUpdate()
     {
-        Vector2 screen = Camera.main.WorldToScreenPoint(transform.position);
+        meter.slider.value = happiness;
+        meter.worldPosition = transform.position + Vector3.up * 3;
+    }
 
-        GUI.color = Color.black;
-        int offset = 0;
-        foreach (var need in needs)
+    float GetUtilityObjectScore(UtilityObject utilityObject)
+    {
+        float score = 0;
+
+        foreach (var effector in utilityObject.effectors)
         {
-            GUI.Label(new Rect(screen.x + 20, Screen.height - screen.y - offset, 300, 20), need.type.ToString() + ": " + need.motive);
-            offset += 20;
+            Need need = GetNeedByType(effector.type);
+            if (need != null)
+            {
+                float futureNeed = need.GetMotive(need.input + effector.change);
+                score += need.motive - futureNeed;
+            }
         }
-        //GUI.Label(new Rect(screen.x + 20, Screen.height - screen.y - offset, 300, 20), mood.ToString());
-    }*/
+
+        return score;
+    }
+
+    Need GetNeedByType(Need.Type type)
+    {
+        return needs.First(need => need.type == type);
+    }
 }
