@@ -8,7 +8,7 @@ public class UtilityAgent : Agent
     [SerializeField] Perception perception;
     [SerializeField] MeterUI meter;
     
-    const float MIN_SCORE = 0.1f;
+    const float MIN_SCORE = 0.2f;
     
     Need[] needs;
     UtilityObject activeUtilityObject = null;
@@ -55,7 +55,14 @@ public class UtilityAgent : Agent
             }
 
             // set active utility object to the first utility object
-            activeUtilityObject = (utilityObjects.Count == 0) ? null : utilityObjects[0];
+            //activeUtilityObject = (utilityObjects.Count == 0) ? null : utilityObjects[0];
+
+            // set the active utility object to highest utility object
+            //activeUtilityObject = (utilityObjects.Count == 0) ? null : GetHighestUtilityObject(utilityObjects.ToArray());
+
+            // set the active utility object to a random utility object
+            activeUtilityObject = GetRandomUtilityObject(utilityObjects.ToArray());
+
             if (activeUtilityObject != null)
             {
                 StartCoroutine(ExecuteUtilityObject(activeUtilityObject));
@@ -134,5 +141,47 @@ public class UtilityAgent : Agent
     Need GetNeedByType(Need.Type type)
     {
         return needs.First(need => need.type == type);
+    }
+
+    UtilityObject GetHighestUtilityObject(UtilityObject[] utilityObjects)
+    {
+        UtilityObject highestUtilityObject = null;
+        float highestScore = MIN_SCORE;
+        foreach (var utilityObject in utilityObjects)
+        {
+            float score = utilityObject.score;
+            if (score > highestScore)
+            {
+                highestScore = score;
+                highestUtilityObject = utilityObject;
+            }
+        }
+
+        return highestUtilityObject;
+    }
+
+    UtilityObject GetRandomUtilityObject(UtilityObject[] utilityObjects)
+    {
+        // evaluate all utility objects
+        float[] scores = new float[utilityObjects.Length];
+        float totalScore = 0;
+        for (int i = 0; i < utilityObjects.Length; i++)
+        {
+            scores[i] = utilityObjects[i].score;
+            totalScore += utilityObjects[i].score;
+        }
+
+        // select random utility object based on score
+        // the higher the score, the greater the chance of being random selected
+
+        float random = Random.Range(0, totalScore);
+        for (int i = 0; i < scores.Length; i++)
+        {
+            if (random < scores[i]) return utilityObjects[i];
+            
+            random -= scores[i];
+        }
+
+        return null;
     }
 }
